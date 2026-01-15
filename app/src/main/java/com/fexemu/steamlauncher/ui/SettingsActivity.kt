@@ -68,8 +68,10 @@ class SettingsActivity : AppCompatActivity() {
         binding.seekbarLsfgMultiplier.setOnSeekBarChangeListener(
             object : android.widget.SeekBar.OnSeekBarChangeListener {
                 override fun onProgressChanged(seekBar: android.widget.SeekBar?, progress: Int, fromUser: Boolean) {
-                    val multiplier = progress + 1 // 1-based multiplier
-                    updateLsfgMultiplierText(multiplier)
+                    if (fromUser) {
+                        val multiplier = progress + 1 // 1-based multiplier
+                        updateLsfgMultiplierText(multiplier)
+                    }
                 }
                 
                 override fun onStartTrackingTouch(seekBar: android.widget.SeekBar?) {}

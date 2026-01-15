@@ -45,7 +45,11 @@ LSFG-VK intercepts rendered frames from Vulkan-based games and:
 1. Open the app and go to **Settings**
 2. Scroll to **Graphics Enhancement** section
 3. Toggle **Enable LSFG-VK Frame Generation**
-4. Adjust the **Frame Generation** multiplier slider (2x, 3x, or 4x)
+4. Adjust the **Frame Generation** multiplier slider:
+   - **1x**: Frame generation disabled (native rendering)
+   - **2x**: Double the frame rate
+   - **3x**: Triple the frame rate
+   - **4x**: Quadruple the frame rate
 5. Settings are saved automatically
 
 ### Environment Variables
