@@ -2,6 +2,8 @@ package com.fexemu.steamlauncher.steam
 
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.security.crypto.EncryptedSharedPreferences
+import androidx.security.crypto.MasterKey
 import com.fexemu.steamlauncher.steam.models.SteamAuth
 import com.fexemu.steamlauncher.steam.models.SteamGame
 import kotlinx.coroutines.Dispatchers
@@ -12,8 +14,24 @@ import kotlinx.coroutines.withContext
  */
 class SteamManager(private val context: Context) {
     
-    private val prefs: SharedPreferences = 
-        context.getSharedPreferences("steam_prefs", Context.MODE_PRIVATE)
+    private val prefs: SharedPreferences by lazy {
+        try {
+            val masterKey = MasterKey.Builder(context)
+                .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+                .build()
+            
+            EncryptedSharedPreferences.create(
+                context,
+                "steam_prefs_encrypted",
+                masterKey,
+                EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+                EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+            )
+        } catch (e: Exception) {
+            // Fallback to regular SharedPreferences if encryption fails
+            context.getSharedPreferences("steam_prefs", Context.MODE_PRIVATE)
+        }
+    }
     
     private val PREF_STEAM_ID = "steam_id"
     private val PREF_API_KEY = "api_key"

@@ -52,8 +52,12 @@ class CloudSaveManager(private val context: Context) {
                 
                 val localFile = File(savesDir, cloudFile.filename)
                 
-                // In a real implementation, this would download from Steam Cloud
-                // For now, we just create a placeholder
+                // TODO: This is a placeholder implementation
+                // In a real application, you would need to:
+                // 1. Use Steam's ISteamRemoteStorage API to get download URL
+                // 2. Authenticate the download request
+                // 3. Download the actual file content
+                // 4. Verify file integrity (SHA hash)
                 
                 Result.success(localFile)
             } catch (e: Exception) {
@@ -71,8 +75,12 @@ class CloudSaveManager(private val context: Context) {
                     Exception("Not authenticated")
                 )
                 
-                // In a real implementation, this would upload to Steam Cloud
-                // using the ISteamRemoteStorage API
+                // TODO: This is a placeholder implementation
+                // In a real application, you would need to:
+                // 1. Use Steam's ISteamRemoteStorage/SetUGCFileUploadUrl API
+                // 2. Get upload URL and parameters
+                // 3. Upload file content to Steam Cloud
+                // 4. Verify upload success
                 
                 Result.success(true)
             } catch (e: Exception) {

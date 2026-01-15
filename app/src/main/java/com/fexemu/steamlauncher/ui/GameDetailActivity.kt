@@ -68,7 +68,13 @@ class GameDetailActivity : AppCompatActivity() {
     }
     
     private fun downloadGame() {
-        // In a real implementation, this would get the actual download URL
+        // NOTE: This is a placeholder implementation.
+        // In a real application, you would need to:
+        // 1. Use Steam's content delivery system (CDN)
+        // 2. Authenticate with Steam's download servers
+        // 3. Handle Steam's depot system for game files
+        // Steam Web API doesn't provide direct game download URLs
+        
         val downloadUrl = "https://example.com/games/$gameId"
         
         DownloadService.startDownload(this, gameId, gameName, downloadUrl)

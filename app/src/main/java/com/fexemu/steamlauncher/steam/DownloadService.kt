@@ -84,8 +84,9 @@ class DownloadService : Service() {
                     }
                 }
                 
-                // Extract downloaded file
-                // This would need proper extraction logic
+                // TODO: Extract downloaded file
+                // This requires implementing proper extraction logic for tar.gz files
+                // Example: ProcessBuilder("tar", "-xzf", outputFile.path, "-C", gamesDir.path).start()
                 
                 stopSelf()
             } catch (e: Exception) {

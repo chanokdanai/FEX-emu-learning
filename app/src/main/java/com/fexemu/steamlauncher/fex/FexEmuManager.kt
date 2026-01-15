@@ -61,6 +61,12 @@ class FexEmuManager(private val context: Context) {
         try {
             val config = getConfig()
             
+            // TODO: This is a placeholder implementation
+            // In a real application, you would need to:
+            // 1. Bundle or download the actual FEX-Emu binary for Android
+            // 2. Set up proper execution environment
+            // 3. Handle process lifecycle
+            
             // Build FEX-Emu command
             // In a real implementation, this would use the actual FEX-Emu binary
             val command = buildList {
@@ -89,8 +95,13 @@ class FexEmuManager(private val context: Context) {
      */
     fun setupRootfs(distroUrl: String, onProgress: (Int) -> Unit): Boolean {
         try {
-            // In a real implementation, this would download and extract
-            // a Linux distribution (like Ubuntu) to use as rootfs
+            // TODO: This is a placeholder implementation
+            // In a real application, you would need to:
+            // 1. Download the rootfs archive from the provided URL
+            // 2. Verify the download (checksum)
+            // 3. Extract to the rootfs directory
+            // 4. Set up proper permissions
+            // 5. Install required dependencies in the rootfs
             
             onProgress(100)
             return true
