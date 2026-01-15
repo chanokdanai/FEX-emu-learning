@@ -13,6 +13,7 @@ An Android application that integrates Steam with FEX-Emu to run x86/x86_64 Stea
 ### 2. FEX-Emu Integration
 - **Game Execution**: Run x86/x86_64 games on ARM devices using FEX-Emu
 - **Configurable Settings**: Enable/disable JIT compilation and thunking
+- **LSFG-VK Graphics**: Frame generation and upscaling using Lossless Scaling for Vulkan
 - **Linux Rootfs Support**: Download and configure a Linux distribution for game execution
 
 ### 3. User Interface
@@ -85,6 +86,7 @@ app/
 
 1. **Login to Steam**
    - Launch the app
+   - You'll see the enhanced Steam login screen with Steam branding
    - Enter your Steam ID
    - Enter your Steam API Key
    - Click "Login"
@@ -96,6 +98,8 @@ app/
 3. **Configure FEX-Emu** (Optional)
    - Go to Settings from the menu
    - Configure JIT and thunking options
+   - Enable LSFG-VK for frame generation and better graphics
+   - Adjust frame generation multiplier (2x, 3x, or 4x)
    - Download a Linux rootfs if needed
 
 ## Usage
@@ -188,6 +192,8 @@ The app can be tested on:
 
 ## Future Enhancements
 
+- [x] Enhanced Steam login screen with branding
+- [x] LSFG-VK frame generation support
 - [ ] Steam Guard authentication support
 - [ ] Better game compatibility checking
 - [ ] Integrated FEX-Emu binary
