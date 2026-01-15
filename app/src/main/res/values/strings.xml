@@ -33,7 +33,8 @@
     <string name="enable_lsfg_vk">Enable LSFG-VK Frame Generation</string>
     <string name="lsfg_vk_description">Lossless Scaling Frame Generation for Vulkan - Improves frame rate and smoothness</string>
     <string name="lsfg_multiplier_label">Frame Generation: 2x</string>
-    <string name="setup_rootfs">Setup Linux Rootfs</string>
+    <string name="lsfg_multiplier_format">Frame Generation: %dx</string>
+    <string name="setup_rootfs">Setup Linux Rootfs</string></string>
     <string name="rootfs_url_hint">Rootfs Download URL</string>
     <string name="download_rootfs">Download Rootfs</string>
     

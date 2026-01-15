@@ -15,6 +15,7 @@ LSFG-VK intercepts rendered frames from Vulkan-based games and:
 ## Features in This App
 
 ### Frame Generation
+- **1x Multiplier**: Frame generation disabled (native frame rate)
 - **2x Multiplier**: Doubles the perceived frame rate by adding 1 interpolated frame
 - **3x Multiplier**: Triples frame rate with 2 interpolated frames
 - **4x Multiplier**: Quadruples frame rate with 3 interpolated frames
@@ -85,7 +86,7 @@ LSFG_MULTIPLIER=2  # Or 3, 4 based on your setting
 
 ### Optimization Tips
 
-1. **Start with 2x**: Begin with the 2x multiplier and increase if performance allows
+1. **Start with 2x**: Begin with the 2x multiplier (or disable with 1x) and increase if performance allows
 2. **Monitor GPU Usage**: High GPU usage may cause overheating on mobile devices
 3. **Game-Specific Testing**: Not all games benefit equally from frame generation
 4. **Disable for Fast-Paced Games**: Competitive games may suffer from input latency

@@ -43,7 +43,7 @@ class SettingsActivity : AppCompatActivity() {
     }
     
     private fun updateLsfgMultiplierText(multiplier: Int) {
-        binding.tvLsfgMultiplier.text = "Frame Generation: ${multiplier}x"
+        binding.tvLsfgMultiplier.text = getString(R.string.lsfg_multiplier_format, multiplier)
     }
     
     private fun setupClickListeners() {
