@@ -48,8 +48,21 @@ class SteamLoginActivity : AppCompatActivity() {
         val steamId = binding.steamIdInput.text.toString().trim()
         val apiKey = binding.apiKeyInput.text.toString().trim()
         
+        // Validate input
         if (steamId.isEmpty() || apiKey.isEmpty()) {
             Toast.makeText(this, R.string.error_login, Toast.LENGTH_SHORT).show()
+            return
+        }
+        
+        // Validate Steam ID format (should be 17-digit number)
+        if (!steamId.matches(Regex("^\\d{17}$"))) {
+            Toast.makeText(this, "Invalid Steam ID format. Should be a 17-digit number.", Toast.LENGTH_SHORT).show()
+            return
+        }
+        
+        // Validate API key format (should be 32-character hex string)
+        if (!apiKey.matches(Regex("^[A-Fa-f0-9]{32}$"))) {
+            Toast.makeText(this, "Invalid API Key format. Should be a 32-character hexadecimal string.", Toast.LENGTH_SHORT).show()
             return
         }
         

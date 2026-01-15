@@ -61,6 +61,11 @@ class DownloadService : Service() {
     private suspend fun downloadGame(gameId: Long, gameName: String, downloadUrl: String) {
         withContext(Dispatchers.IO) {
             try {
+                // Validate URL to prevent potential security issues
+                if (!downloadUrl.startsWith("https://")) {
+                    throw SecurityException("Download URL must use HTTPS")
+                }
+                
                 val gamesDir = File(getExternalFilesDir(null), "games/$gameId")
                 gamesDir.mkdirs()
                 
