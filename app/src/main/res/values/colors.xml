@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="steam_blue">#1B2838</color>
+    <color name="steam_dark_blue">#171A21</color>
+    <color name="steam_green">#5C7E10</color>
+    <color name="steam_dark_green">#4C6B08</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="gray">#808080</color>
+    <color name="light_gray">#D3D3D3</color>
+</resources>
