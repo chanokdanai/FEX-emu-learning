@@ -45,13 +45,34 @@ class FexEmuManager(private val context: Context) {
      * Get FEX-Emu configuration
      */
     fun getConfig(): FexConfig {
+        // Load LSFG-VK settings from SharedPreferences
+        val prefs = context.getSharedPreferences("fex_settings", Context.MODE_PRIVATE)
+        val enableLsfgVk = prefs.getBoolean("enable_lsfg_vk", false)
+        val lsfgVkMultiplier = prefs.getInt("lsfg_vk_multiplier", 2)
+        
         return FexConfig(
             fexPath = fexDir.absolutePath,
             rootfsPath = rootfsDir.absolutePath,
-            enableThunking = true,
+            enableThunking = prefs.getBoolean("enable_thunking", true),
             cpuCores = Runtime.getRuntime().availableProcessors(),
-            enableJit = true
+            enableJit = prefs.getBoolean("enable_jit", true),
+            enableLsfgVk = enableLsfgVk,
+            lsfgVkMultiplier = lsfgVkMultiplier
         )
+    }
+    
+    /**
+     * Save FEX-Emu configuration
+     */
+    fun saveConfig(config: FexConfig) {
+        val prefs = context.getSharedPreferences("fex_settings", Context.MODE_PRIVATE)
+        prefs.edit().apply {
+            putBoolean("enable_thunking", config.enableThunking)
+            putBoolean("enable_jit", config.enableJit)
+            putBoolean("enable_lsfg_vk", config.enableLsfgVk)
+            putInt("lsfg_vk_multiplier", config.lsfgVkMultiplier)
+            apply()
+        }
     }
     
     /**
@@ -67,6 +88,13 @@ class FexEmuManager(private val context: Context) {
             // 2. Set up proper execution environment
             // 3. Handle process lifecycle
             
+            // Build environment variables for LSFG-VK
+            val envVars = mutableMapOf<String, String>()
+            if (config.enableLsfgVk) {
+                envVars["ENABLE_LSFG"] = "1"
+                envVars["LSFG_MULTIPLIER"] = config.lsfgVkMultiplier.toString()
+            }
+            
             // Build FEX-Emu command
             // In a real implementation, this would use the actual FEX-Emu binary
             val command = buildList {
@@ -80,7 +108,7 @@ class FexEmuManager(private val context: Context) {
                 add(gamePath)
             }
             
-            // In a real implementation, this would execute FEX-Emu
+            // In a real implementation, this would execute FEX-Emu with LSFG-VK environment
             // For now, this is a placeholder
             
             return null
@@ -120,5 +148,7 @@ data class FexConfig(
     val rootfsPath: String,
     val enableThunking: Boolean,
     val cpuCores: Int,
-    val enableJit: Boolean
+    val enableJit: Boolean,
+    val enableLsfgVk: Boolean = false,
+    val lsfgVkMultiplier: Int = 2
 )

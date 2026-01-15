@@ -13,6 +13,7 @@ An Android application that integrates Steam with FEX-Emu to run x86/x86_64 Stea
 ### 2. FEX-Emu Integration
 - **Game Execution**: Run x86/x86_64 games on ARM devices using FEX-Emu
 - **Configurable Settings**: Enable/disable JIT compilation and thunking
+- **LSFG-VK Graphics**: Frame generation and upscaling using Lossless Scaling for Vulkan
 - **Linux Rootfs Support**: Download and configure a Linux distribution for game execution
 
 ### 3. User Interface
@@ -69,6 +70,8 @@ app/
 
 ### Building the App
 
+#### Option 1: Using Android Studio (Recommended)
+
 1. Clone the repository:
    ```bash
    git clone https://github.com/chanokdanai/FEX-emu-learning.git
@@ -76,15 +79,80 @@ app/
    ```
 
 2. Open the project in Android Studio
+   - File → Open → Select the `FEX-emu-learning` directory
 
-3. Sync Gradle files and build the project
+3. Sync Gradle files
+   - Android Studio will automatically prompt to sync
+   - Or manually: File → Sync Project with Gradle Files
 
-4. Run on an ARM Android device or emulator (API 26+)
+4. Build the project
+   - Build → Make Project (Ctrl+F9 / Cmd+F9)
+   - Or Build → Build Bundle(s) / APK(s) → Build APK(s)
+
+5. Run on an ARM Android device or emulator (API 26+)
+   - Connect your device or start an emulator
+   - Run → Run 'app' (Shift+F10 / Ctrl+R)
+
+#### Option 2: Command Line Build
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/chanokdanai/FEX-emu-learning.git
+   cd FEX-emu-learning
+   ```
+
+2. Build debug APK:
+   ```bash
+   ./gradlew assembleDebug
+   ```
+   
+   The APK will be generated at:
+   ```
+   app/build/outputs/apk/debug/app-debug.apk
+   ```
+
+3. Build release APK:
+   ```bash
+   ./gradlew assembleRelease
+   ```
+   
+   The APK will be generated at:
+   ```
+   app/build/outputs/apk/release/app-release.apk
+   ```
+
+4. Install on connected device:
+   ```bash
+   ./gradlew installDebug
+   ```
+
+5. Run tests:
+   ```bash
+   ./gradlew test
+   ```
+
+#### Troubleshooting Build Issues
+
+- **Gradle wrapper not found**: Download it manually or use system Gradle
+  ```bash
+  gradle wrapper --gradle-version 8.0
+  ```
+
+- **SDK not found**: Set `ANDROID_HOME` environment variable
+  ```bash
+  export ANDROID_HOME=/path/to/Android/sdk
+  ```
+
+- **Build fails**: Clean and rebuild
+  ```bash
+  ./gradlew clean assembleDebug
+  ```
 
 ### First-Time Setup
 
 1. **Login to Steam**
    - Launch the app
+   - You'll see the enhanced Steam login screen with Steam branding
    - Enter your Steam ID
    - Enter your Steam API Key
    - Click "Login"
@@ -96,6 +164,8 @@ app/
 3. **Configure FEX-Emu** (Optional)
    - Go to Settings from the menu
    - Configure JIT and thunking options
+   - Enable LSFG-VK for frame generation and better graphics
+   - Adjust frame generation multiplier (2x, 3x, or 4x)
    - Download a Linux rootfs if needed
 
 ## Usage
@@ -188,6 +258,8 @@ The app can be tested on:
 
 ## Future Enhancements
 
+- [x] Enhanced Steam login screen with branding
+- [x] LSFG-VK frame generation support
 - [ ] Steam Guard authentication support
 - [ ] Better game compatibility checking
 - [ ] Integrated FEX-Emu binary

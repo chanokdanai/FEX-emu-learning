@@ -49,11 +49,24 @@ gameLauncher.launchGame(gameId, gameName) { log ->
 - **Enable**: Use native libraries when possible
 - **Disable**: Emulate all library calls
 
-### 3. CPU Cores
+### 3. LSFG-VK Frame Generation
+- **Enable**: Activate Lossless Scaling Frame Generation for Vulkan
+- **Disable**: Use standard rendering
+- **Multiplier**: Choose frame generation multiplier (1x-4x)
+  - 2x: Doubles frame rate with interpolated frames
+  - 3x: Triples frame rate
+  - 4x: Quadruples frame rate
+
+**Note**: LSFG-VK requires:
+- Vulkan-compatible games or DXVK translation layer
+- Device with Vulkan support
+- May increase input latency slightly
+
+### 4. CPU Cores
 - Automatically detected from device
 - Can be configured for performance tuning
 
-### 4. Rootfs
+### 5. Rootfs
 - Linux distribution root filesystem
 - Required for running games
 - Common choices: Ubuntu, Debian
@@ -160,7 +173,17 @@ gameLauncher.launchGame(gameId, gameName) { log ->
 
 ## Advanced Configuration
 
-### Environment Variables
+### LSFG-VK Environment Variables
+```kotlin
+// LSFG-VK is automatically configured when enabled in settings
+// The following environment variables are set:
+val env = mapOf(
+    "ENABLE_LSFG" to "1",
+    "LSFG_MULTIPLIER" to "2"  // Or 3, 4 based on settings
+)
+```
+
+### FEX-Emu Environment Variables
 ```kotlin
 // Can be added to FexEmuManager
 val env = mapOf(
@@ -185,4 +208,5 @@ Create `.fex-emu/Config.json` in app data directory
 - [ ] Automatic rootfs selection
 - [ ] Per-game configurations
 - [ ] Performance profiles
-- [ ] Graphics API translation (DXVK)
+- [x] Graphics API translation (LSFG-VK)
+- [ ] Integration with DXVK for DirectX games

@@ -37,12 +37,60 @@ class SettingsActivity : AppCompatActivity() {
         val config = fexEmuManager.getConfig()
         binding.switchEnableJit.isChecked = config.enableJit
         binding.switchEnableThunking.isChecked = config.enableThunking
+        binding.switchEnableLsfgVk.isChecked = config.enableLsfgVk
+        binding.seekbarLsfgMultiplier.progress = config.lsfgVkMultiplier - 1 // 0-based for seekbar
+        updateLsfgMultiplierText(config.lsfgVkMultiplier)
+    }
+    
+    private fun updateLsfgMultiplierText(multiplier: Int) {
+        binding.tvLsfgMultiplier.text = getString(R.string.lsfg_multiplier_format, multiplier)
     }
     
     private fun setupClickListeners() {
         binding.btnDownloadRootfs.setOnClickListener {
             downloadRootfs()
         }
+        
+        // Save settings when switches are toggled
+        binding.switchEnableJit.setOnCheckedChangeListener { _, isChecked ->
+            saveSettings()
+        }
+        
+        binding.switchEnableThunking.setOnCheckedChangeListener { _, isChecked ->
+            saveSettings()
+        }
+        
+        binding.switchEnableLsfgVk.setOnCheckedChangeListener { _, isChecked ->
+            saveSettings()
+        }
+        
+        // Update LSFG multiplier
+        binding.seekbarLsfgMultiplier.setOnSeekBarChangeListener(
+            object : android.widget.SeekBar.OnSeekBarChangeListener {
+                override fun onProgressChanged(seekBar: android.widget.SeekBar?, progress: Int, fromUser: Boolean) {
+                    if (fromUser) {
+                        val multiplier = progress + 1 // 1-based multiplier
+                        updateLsfgMultiplierText(multiplier)
+                    }
+                }
+                
+                override fun onStartTrackingTouch(seekBar: android.widget.SeekBar?) {}
+                
+                override fun onStopTrackingTouch(seekBar: android.widget.SeekBar?) {
+                    saveSettings()
+                }
+            }
+        )
+    }
+    
+    private fun saveSettings() {
+        val config = fexEmuManager.getConfig().copy(
+            enableJit = binding.switchEnableJit.isChecked,
+            enableThunking = binding.switchEnableThunking.isChecked,
+            enableLsfgVk = binding.switchEnableLsfgVk.isChecked,
+            lsfgVkMultiplier = binding.seekbarLsfgMultiplier.progress + 1
+        )
+        fexEmuManager.saveConfig(config)
     }
     
     private fun downloadRootfs() {

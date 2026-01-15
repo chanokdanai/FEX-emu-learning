@@ -4,6 +4,7 @@
     
     <!-- Login -->
     <string name="login_title">Sign in to Steam</string>
+    <string name="login_subtitle">Connect with FEX-Emu</string>
     <string name="steam_id_hint">Steam ID</string>
     <string name="api_key_hint">Steam API Key</string>
     <string name="login_button">Login</string>
@@ -26,9 +27,14 @@
     
     <!-- Settings -->
     <string name="fex_settings">FEX-Emu Settings</string>
+    <string name="graphics_settings">Graphics Enhancement</string>
     <string name="enable_jit">Enable JIT</string>
     <string name="enable_thunking">Enable Thunking</string>
-    <string name="setup_rootfs">Setup Linux Rootfs</string>
+    <string name="enable_lsfg_vk">Enable LSFG-VK Frame Generation</string>
+    <string name="lsfg_vk_description">Lossless Scaling Frame Generation for Vulkan - Improves frame rate and smoothness</string>
+    <string name="lsfg_multiplier_label">Frame Generation: 2x</string>
+    <string name="lsfg_multiplier_format">Frame Generation: %dx</string>
+    <string name="setup_rootfs">Setup Linux Rootfs</string></string>
     <string name="rootfs_url_hint">Rootfs Download URL</string>
     <string name="download_rootfs">Download Rootfs</string>
     
